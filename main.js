@@ -12,7 +12,7 @@ xhr.onload = function(){
       var select_City = document.querySelector('#city');  // 選擇器：縣市
       var select_Town = document.querySelector('#town');  // 選擇器：城鎮
       var title_City = document.querySelector('#Title_City'); //Content 標題：縣市
-      var titie_Town = document.querySelector('#TitleTown');  //Content 標題：城鎮
+      var title_Town = document.querySelector('#Title_Town');  //Content 標題：城鎮
       var Content_pm = document.querySelector('.result');     //結果
       var UpdateTime = document.querySelector('#updateTime'); //更新時間
       /************************************************************************************************************ */
@@ -35,6 +35,7 @@ xhr.onload = function(){
       select_City.innerHTML = String1;                //綁定選擇器 : 縣市
 
       select_City.addEventListener('change',function(){ //縣市添加event
+
         let String = ''
         for(let i=0;i<data.length;i++){
           if(select_City.value == data[i].county){
@@ -42,9 +43,26 @@ xhr.onload = function(){
           }
         }
         select_Town.innerHTML = String;
-
-        select_Town.addEventListener('change',function(){
-
-        })
+        chagetitle();
       })
+      select_Town.addEventListener('change',chagetitle,false)//城鎮添加event
+
+       
+      function chagetitle(){                        //改變title
+        title_City.textContent = select_City.value;
+        title_Town.textContent = select_Town.value;
+        
+        let string = ''
+        for(let i=0;i<data.length;i++){
+          if(data[i].county == select_City.value && data[i].Site == select_Town.value){
+            string+= `
+              <div>${data[i].county},${data[i].Site}, PM2.5: ${data[i].PM25} ${data[i].ItemUnit}</div>
+            `
+          }
+        }
+        Content_pm.innerHTML = string;
+      }
+
+      
+
     }
