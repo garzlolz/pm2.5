@@ -36,7 +36,7 @@ xhr.onload = function(){
 
       select_City.addEventListener('change',function(){ //縣市添加event
 
-        let String = ''
+        let String = ' '
         for(let i=0;i<data.length;i++){
           if(select_City.value == data[i].county){
             String += `<option dataset="index${i}" value="${data[i].Site}">${data[i].Site}</option>`
@@ -52,7 +52,7 @@ xhr.onload = function(){
         title_City.textContent = select_City.value;
         title_Town.textContent = select_Town.value;
         
-        let string = ''
+        let string = ' '
         for(let i=0;i<data.length;i++){
           if(data[i].county == select_City.value && data[i].Site == select_Town.value){
             string+= `
